@@ -1,2 +1,5 @@
-h1 Products#index
-p Find me in app/views/products/index.html.slim
+=render partial: 'sidenav'
+.page-header
+  h1
+    | Sweet Merch
+=render partial: 'product', collection: @products

@@ -1,0 +1,11 @@
+.product
+  h2 = product.name
+  p
+    strong> Price:
+    = number_to_currency product.price
+
+    p = product.description
+    - unless product.image_file_name.empty?
+      = image_tag product.image
+
+    p = link_to 'details', product
