@@ -1,4 +1,6 @@
 .page-header
   h1
     | Sweet Merch
-=render partial: 'product', collection: @products, locals: {full_details: true}
+    =render partial: 'product', collection: @products, locals: {full_details: true}
+    =paginate @products
+    =page_entries_info @products
