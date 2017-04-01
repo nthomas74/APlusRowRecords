@@ -10,7 +10,9 @@
           h1
             | Contact Us by any of the following means!
         -@contacts.each do |contact|
-            = contact.name 
+          p
+            strong
+              = contact.name 
             | : 
             = contact.data
             
