@@ -1,6 +1,40 @@
 .page-header
+  
   h1
     | Sweet Merch
+  div.panel.panel-default 
+    div.panel-body
+      =form_tag products_path do |f|
+        div.panel.panel-default
+          |Filter By:
+          div.row
+            div.col-sm-4
+              | Artist
+            div.col-sm-4
+              | Type of Article
+            div.col-sm-4
+              | New / On Sale
+          div.row        
+            div.col-sm-4   
+              =collection_select(:product, :artist_id, @artists, :id, :name, {}, {class: 'form-control'})      
+
+            div.col-sm-4   
+              =collection_select(:product, :product_type_id, @product_types, :id, :name, {}, {class: 'form-control'})      
+            
+            div.col-sm-2
+              .checkbox
+                label.checkbox-inline
+                input type="checkbox" name="on_sale" value="on_sale" On sale
+            div.col-sm-2
+              .checkbox
+                label.checkbox-inline
+                input type="checkbox" name="new" value="new" New
+          div.row
+            div.col-md-2
+              button.btn.btn-primary type="submit"  Apply Filters           
+      
+    
     =render partial: 'product', collection: @products, locals: {full_details: true}
-    =paginate @products
-    =page_entries_info @products
+  =paginate @products
+  =page_entries_info @products
+= debug params
