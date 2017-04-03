@@ -16,25 +16,27 @@
               | New / On Sale
           div.row        
             div.col-sm-4   
-              =collection_select(:product, :artist_id, @artists, :id, :name, {}, {class: 'form-control'})      
+              =collection_select(:product, :artist_id, @artists, :id, :name, {selected: @artist, prompt: "Select Artist"}, {class: 'form-control'})      
 
             div.col-sm-4   
-              =collection_select(:product, :product_type_id, @product_types, :id, :name, {}, {class: 'form-control'})      
+              =collection_select(:product, :product_type_id, @product_types, :id, :name, {selected: @product_type, prompt: "Select Type"}, {class: 'form-control'})      
             
             div.col-sm-2
               .checkbox
                 label.checkbox-inline
-                input type="checkbox" name="on_sale" value="on_sale" On sale
+                input type="checkbox" name="on_sale" value="on_sale" checked=('true' if @on_sale == "yes") 
+                | On sale
             div.col-sm-2
               .checkbox
                 label.checkbox-inline
-                input type="checkbox" name="new" value="new" New
+                input type="checkbox" name="new" value="new" checked=('true' if @new == "yes")
+                | New
           div.row
             div.col-md-2
               button.btn.btn-primary type="submit"  Apply Filters           
-      
+              
     
     =render partial: 'product', collection: @products, locals: {full_details: true}
   =paginate @products
   =page_entries_info @products
-= debug params
+/ = debug params
