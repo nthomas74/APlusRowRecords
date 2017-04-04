@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
     if params.has_key?("srch_term")
 #@products = Product.joins(:artist).where('artists.name LIKE ? OR products.name LIKE ?', params[:srch_term], params[:srch_term]).page(params[:page]).per(5).order(:name)
     @products = Product.joins(:artist, :product_type)
-      .where("artists.name ILIKE ? OR artists.name ILIKE ? OR artists.name ILIKE ? OR artists.name = ? OR products.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR products.name = ? OR product_types.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name = ?", \
+      .where("artists.name ILIKE ? OR artists.name ILIKE ? OR artists.name ILIKE ? OR artists.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ?", \
       "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term], \
       "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term], \
       "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term] \

@@ -7,6 +7,9 @@ class Product < ApplicationRecord
   validates_attachment_file_name :image, :matches => [/png\Z/, /jpe?g\Z/, /gif\Z/]
   paginates_per 5
 
-
+  validates :name, :description, :price, :stock_quantity, presence:true
+  validates :price, :stock_quantity, numericality: {greater_than_or_equal_to: 0}
+  validates :new, :on_sale, inclusion: { in: [true, false] }
+  validates :new, :on_sale, exclusion: { in: [nil] }
 
 end
