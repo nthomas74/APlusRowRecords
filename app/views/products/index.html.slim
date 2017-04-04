@@ -1,42 +1,52 @@
 .page-header
   
   h1
-    | Sweet Merch
-  div.panel.panel-default 
+    | Sweet Merch    
+  div.panel.panel-default
     div.panel-body
+      .container
+        .col-md-3
+          form.navbar-form role="search" 
+            .input-group.add-on
+              input#srch-term.form-control name="srch_term" placeholder="Search" type="text" /
+              .input-group-btn
+                button.btn.btn-default type="submit" 
+                  i.glyphicon.glyphicon-search 
       =form_tag products_path do |f|
-        div.panel.panel-default
-          |Filter By:
-          div.row
-            div.col-sm-4
-              | Artist
-            div.col-sm-4
-              | Type of Article
-            div.col-sm-4
-              | New / On Sale
-          div.row        
-            div.col-sm-4   
-              =collection_select(:product, :artist_id, @artists, :id, :name, {selected: @artist, prompt: "Select Artist"}, {class: 'form-control'})      
+        - unless params.has_key?("srch_term")
+          div.panel.panel-default 
+            |Filter By:
+            div.row
+              div.col-sm-4
+                | Artist
+              div.col-sm-4
+                | Type of Article
+              div.col-sm-4
+                | New / On Sale
+            div.row        
+              div.col-sm-4   
+                =collection_select(:product, :artist_id, @artists, :id, :name, {selected: @artist, prompt: "Select Artist"}, {class: 'form-control'})      
 
-            div.col-sm-4   
-              =collection_select(:product, :product_type_id, @product_types, :id, :name, {selected: @product_type, prompt: "Select Type"}, {class: 'form-control'})      
-            
-            div.col-sm-2
-              .checkbox
-                label.checkbox-inline
-                input type="checkbox" name="on_sale" value="on_sale" checked=('true' if @on_sale == "yes") 
-                | On sale
-            div.col-sm-2
-              .checkbox
-                label.checkbox-inline
-                input type="checkbox" name="new" value="new" checked=('true' if @new == "yes")
-                | New
-          div.row
-            div.col-md-2
-              button.btn.btn-primary type="submit"  Apply Filters           
+              div.col-sm-4   
+                =collection_select(:product, :product_type_id, @product_types, :id, :name, {selected: @product_type, prompt: "Select Type"}, {class: 'form-control'})      
               
-    
+              div.col-sm-2
+                .checkbox
+                  label.checkbox-inline
+                  input type="checkbox" name="on_sale" value="on_sale" checked=('true' if @on_sale == "yes") 
+                  | On sale
+              div.col-sm-2
+                .checkbox
+                  label.checkbox-inline
+                  input type="checkbox" name="new" value="new" checked=('true' if @new == "yes")
+                  | New
+            div.row
+              div.col-md-2
+                button.btn.btn-primary type="submit"  Apply Filters   
+                      
+        
+
     =render partial: 'product', collection: @products, locals: {full_details: true}
   =paginate @products
   =page_entries_info @products
-/ = debug params
+  = debug params

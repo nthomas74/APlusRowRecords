@@ -1,6 +1,23 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.page(params[:page]).per(5).order(:name)
+    if params.has_key?("srch_term")
+#@products = Product.joins(:artist).where('artists.name LIKE ? OR products.name LIKE ?', params[:srch_term], params[:srch_term]).page(params[:page]).per(5).order(:name)
+    @products = Product.joins(:artist, :product_type)
+      .where("artists.name ILIKE ? OR artists.name ILIKE ? OR artists.name ILIKE ? OR artists.name = ? OR products.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR products.name = ? OR product_types.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name = ?", \
+      "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term], \
+      "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term], \
+      "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term] \
+      ).page(params[:page]).per(5).order(:name)
+  #  @products = Product.joins(:artist, :product_type).where(:artists.name @@ to_tsquery(params[:srch_term]))
+   else
+    #  @products = Product.joins(:artist, :product_type).where(:artists.name @@ to_tsquery(params[:srch_term]))
+     #@products = PgSearch.multisearch(params[:srch_term]).page(params[:page]).per(5).order(:name)
+     @products = Product.all.page(params[:page]).per(5).order(:name)
+    end
+    # @search = Product.search  do
+    #   keywords(params[:srch_term])
+    # end
+    # @products = Product.page(params[:page]).per(5).order(:name)
     @artists = Artist.all.order(:name)
     @product_types = ProductType.all.order:name
   end
@@ -28,4 +45,6 @@ class ProductsController < ApplicationController
     @product_types = ProductType.all.order(:name)
     render :index
   end
+
+
 end

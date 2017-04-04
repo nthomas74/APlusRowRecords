@@ -49,6 +49,7 @@ gem 'bootstrap-generators', '~> 3.3.4'
 gem 'slim-rails'
 gem 'kaminari'
 gem 'mini_magick', '~> 4.5', '>= 4.5.1'
+gem 'pg_search'
 
 
 group :development, :test do
