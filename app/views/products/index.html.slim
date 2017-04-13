@@ -12,7 +12,7 @@
               .input-group-btn
                 button.btn.btn-default type="submit" 
                   i.glyphicon.glyphicon-search 
-                =collection_select(:product, :artist_id, @artists, :id, :name, {selected: @artist, prompt: "Select Artist"}, {class: 'form-control'})
+            =collection_select(:product, :artist_id, @artists, :id, :name, {selected: @artist, prompt: "Select Artist"}, {class: 'form-control'})
       =form_tag products_path do |f|
         - unless params.has_key?("srch_term")
           div.panel.panel-default 
