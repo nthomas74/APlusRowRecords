@@ -8,10 +8,11 @@
         .col-md-3
           form.navbar-form role="search" 
             .input-group.add-on
-              input#srch-term.form-control name="srch_term" placeholder="Search" type="text" /
+              input#srch-term.form-control name="srch_term" placeholder="Search" type="text" /                
               .input-group-btn
                 button.btn.btn-default type="submit" 
                   i.glyphicon.glyphicon-search 
+                =collection_select(:product, :artist_id, @artists, :id, :name, {selected: @artist, prompt: "Select Artist"}, {class: 'form-control'})
       =form_tag products_path do |f|
         - unless params.has_key?("srch_term")
           div.panel.panel-default 

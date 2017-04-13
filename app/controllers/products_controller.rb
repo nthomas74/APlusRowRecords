@@ -1,13 +1,23 @@
 class ProductsController < ApplicationController
   def index
     if params.has_key?("srch_term")
+      if params[:product][:artist_id] != ''
 #@products = Product.joins(:artist).where('artists.name LIKE ? OR products.name LIKE ?', params[:srch_term], params[:srch_term]).page(params[:page]).per(5).order(:name)
-    @products = Product.joins(:artist, :product_type)
-      .where("artists.name ILIKE ? OR artists.name ILIKE ? OR artists.name ILIKE ? OR artists.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ?", \
-      "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term], \
-      "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term], \
-      "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term] \
-      ).page(params[:page]).per(5).order(:name)
+        @products = Product.joins(:artist, :product_type)
+          .where("artists.id = ? AND (artists.name ILIKE ? OR artists.name ILIKE ? OR artists.name ILIKE ? OR artists.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ?)", \
+          "#{params[:product][:artist_id]}", \
+          "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term], \
+          "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term], \
+          "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term] \
+          ).page(params[:page]).per(5).order(:name)
+      else
+        @products = Product.joins(:artist, :product_type)
+          .where("artists.name ILIKE ? OR artists.name ILIKE ? OR artists.name ILIKE ? OR artists.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR products.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ? OR product_types.name ILIKE ?", \
+          "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term], \
+          "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term], \
+          "% #{params[:srch_term]}", "#{params[:srch_term]} %", "% #{params[:srch_term]} %", params[:srch_term] \
+          ).page(params[:page]).per(5).order(:name)
+      end
   #  @products = Product.joins(:artist, :product_type).where(:artists.name @@ to_tsquery(params[:srch_term]))
    else
     #  @products = Product.joins(:artist, :product_type).where(:artists.name @@ to_tsquery(params[:srch_term]))
