@@ -55,4 +55,10 @@ class ProductsController < ApplicationController
     @products = Product.search_by_category(artist, params[:srch_term])
                        .page(params[:page]).per(5).order(:name)
   end
+
+  def add_to_cart
+    @product = Product.find(params[:id])
+    @quantity = params[:quantity]
+    render :show, product: @product
+  end
 end

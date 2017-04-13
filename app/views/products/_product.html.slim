@@ -9,3 +9,12 @@
       = image_tag product.image.url(:small)
     - if full_details
       p = link_to 'details', product
+    - else
+      =form_tag product_path do |f|
+        form.navbar-form role="add_to_cart" 
+          .input-group.add-on
+            input#add_to_cart.form-control name="quantity" placeholder="Quantity" type="number" /                
+            .input-group-btn
+              button.btn.btn-default type="submit" Add to Cart
+        
+= debug params
