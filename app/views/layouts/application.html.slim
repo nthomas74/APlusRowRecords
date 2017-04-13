@@ -36,6 +36,9 @@ html
             li
               a href="/pages/contact"
                 | Contact   
+    btn.btn-primary.btn-circle.btn-xl type="button" href="#" style=("position:absolute;bottom:5px;right:5px;margin:0;padding:5px 3px;")
+      i.glyphicon.glyphicon-shopping-cart style=("vertical-align: -15px;")
+
     .container
       - flash.each do |name, msg|
         = content_tag :div, class: "alert alert-#{ name == :error ? "danger" : "success" } alert-dismissable", role: "alert" do

@@ -12,4 +12,15 @@ class Product < ApplicationRecord
   validates :price, :stock_quantity, numericality: { greater_than_or_equal_to: 0 }
   validates :new, :on_sale, inclusion: { in: [true, false] }
   validates :new, :on_sale, exclusion: { in: [nil] }
+
+  def self.search_by_category(artist, search_term)
+    products = Product.joins(:artist, :product_type)
+                      .where('products.name ILIKE ?'\
+                             ' OR products.name ILIKE ?' \
+                             ' OR products.name ILIKE ?', \
+                             "% #{search_term}", "#{search_term} %",
+                             "% #{search_term} %")
+    products = products.where('artists.id = ?', artist) if artist != ''
+    products
+  end
 end

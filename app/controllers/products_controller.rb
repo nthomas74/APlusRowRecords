@@ -51,14 +51,8 @@ class ProductsController < ApplicationController
   end
 
   def product_for_search
-    @artist = params[:product][:artist_id].to_s
-    @products = Product.joins(:artist, :product_type)
-                       .where('products.name ILIKE ?'\
-                              ' OR products.name ILIKE ?' \
-                              ' OR products.name ILIKE ?', \
-                              "% #{params[:srch_term]}", "#{params[:srch_term]} %",
-                              "% #{params[:srch_term]} %")
+    artist = params[:product][:artist_id].to_s
+    @products = Product.search_by_category(artist, params[:srch_term])
                        .page(params[:page]).per(5).order(:name)
-    @products = @products.where('artists.id = ?', @artist) if @artist != ''
   end
 end
