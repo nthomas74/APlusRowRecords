@@ -17,7 +17,7 @@
       input.form-control.text-center name="quantity" type="number" value=(quantity) /
     td.text-center data-th="Subtotal"  = number_to_currency(item.price*quantity)
     td.actions data-th="" 
-      button#refresh.btn.btn-info.btn-sm type="submit"
-        i.fa.fa-refresh                         
-      button#trash.btn.btn-danger.btn-sm type="submit"
+      button#refresh.btn.btn-info.btn-sm name="refresh" type="submit"
+        i.fa.fa-refresh                       
+      button#trash.btn.btn-danger.btn-sm name="delete" type="submit"
         i.fa.fa-trash-o
