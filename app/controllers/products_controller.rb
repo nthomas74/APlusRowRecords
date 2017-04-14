@@ -58,14 +58,19 @@ class ProductsController < ApplicationController
 
   def add_to_cart
     @product = Product.find(params[:id])
-    @quantity = params[:quantity].to_i if params[:quantity].to_i > 0
+    quantity_param = params[:quantity].to_i
+    @quantity = quantity_param if quantity_param > 0
     add_session_variables(params[:id].to_i, @quantity) if @quantity
-    flash[:added] = 'Added to Cart' if @quantity
     render :show, product: @product
   end
 
   def add_session_variables(id, quantity)
     session[:cart] ||= []
+    session[:cart] << [id, quantity] unless product_in_cart?(id, quantity)
+    flash[:added] = 'Added to Cart' if @quantity
+  end
+
+  def product_in_cart?(id, quantity)
     found = false
     session[:cart].each do |item|
       if item[0] == id
@@ -73,6 +78,6 @@ class ProductsController < ApplicationController
         found = true
       end
     end
-    session[:cart] << [id, quantity] if !found
+    found
   end
 end
