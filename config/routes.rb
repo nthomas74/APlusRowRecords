@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
-
-
-  get 'carts/index'
+  get 'carts/index', to: 'carts#index'
 
   get 'pages/about'
 

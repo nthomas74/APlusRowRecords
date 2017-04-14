@@ -11,7 +11,6 @@ link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css
         .page-header
           h1
             | Shopping Cart
-          =form_tag carts_index_path do |f|
           .container
             table#cart.table.table-hover.table-condensed
               thead
@@ -24,12 +23,9 @@ link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css
                 tbody
                   =render partial: 'item', collection: @products
               tfoot
-                tr.visible-xs
-                  td.text-center
-                    strong Total 1.99
                 tr
                   td
-                    a.btn.btn-warning href="/products" type="submit"
+                    a.btn.btn-warning.pull-left href="/products" type="submit"
                       i.fa.fa-angle-left
                       | Continue Shopping
                   td.hidden-xs colspan="2" 

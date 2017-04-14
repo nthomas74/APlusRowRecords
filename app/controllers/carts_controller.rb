@@ -14,7 +14,7 @@ class CartsController < ApplicationController
     session[:cart].each do |item|
       item[1] = quantity if id == item[0]
     end
-    get_session
+    session_details
   end
 
   def delete_item(id)
