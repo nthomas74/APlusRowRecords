@@ -13,8 +13,11 @@
       =form_tag product_path do |f|
         form.navbar-form role="add_to_cart" 
           .input-group.add-on
-            input#add_to_cart.form-control name="quantity" placeholder="Quantity" type="number" /                
+            input#add_to_cart.form-control name="quantity" placeholder="Quantity" type="number" min="0" value=@quantity /                
             .input-group-btn
-              button.btn.btn-default type="submit" Add to Cart
+              button.btn.btn-defasult type="submit" Add to Cart
+              - if flash[:added]
+                  = flash[:added]
         
 = debug params
+= debug session[:cart].inspect
