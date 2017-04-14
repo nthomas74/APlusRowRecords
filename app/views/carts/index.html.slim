@@ -1,0 +1,51 @@
+/ bootsnipp for product table cred: http://bootsnipp.com/snippets/featured/responsive-shopping-cart
+link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" /
+#page-content-wrapper
+  button.hamburger.is-closed data-toggle="offcanvas" type="button" 
+    span.hamb-top
+    span.hamb-middle
+    span.hamb-bottom
+  .container
+    .row
+      .col-lg-8.col-lg-offset-2
+        .page-header
+          h1
+            | Shopping Cart
+          =form_tag carts_index_path do |f|
+          .container
+            table#cart.table.table-hover.table-condensed
+              thead
+                tr
+                  th style="width:50%"  Product
+                  th style="width:10%"  Price
+                  th style="width:8%"  Quantity
+                  th.text-center style="width:22%"  Subtotal
+                  th style="width:10%" 
+                tbody
+                  =render partial: 'item', collection: @products
+              tfoot
+                tr.visible-xs
+                  td.text-center
+                    strong Total 1.99
+                tr
+                  td
+                    a.btn.btn-warning href="/products" type="submit"
+                      i.fa.fa-angle-left
+                      | Continue Shopping
+                  td.hidden-xs colspan="2" 
+                  td.hidden-xs.text-center
+                    strong 
+                      | Total 
+                      = number_to_currency(@total)
+                  td
+                    a.btn.btn-success.btn-block href="#"  type="submit"
+                      | Checkout
+                      i.fa.fa-angle-right
+
+=debug params
+=debug session[:cart]
+              
+
+
+  
+  

@@ -1,0 +1,23 @@
+- quantity = 0 
+- @cart_items.find do |l| 
+    - if l[0] == item.id 
+      - quantity = l[1]
+= form_tag carts_index_path do |f|
+  tr
+    td data-th="Product" 
+      .row
+        .col-sm-5.hidden-xs
+          = image_tag item.image.url(:small)
+        .col-sm-7
+          h4.nomargin = item.name
+          p = item.description
+    td data-th="Price"  = number_to_currency(item.price)
+    td data-th="Quantity" 
+      input.hidden name="id" value=(item.id) /
+      input.form-control.text-center name="quantity" type="number" value=(quantity) /
+    td.text-center data-th="Subtotal"  = number_to_currency(item.price*quantity)
+    td.actions data-th="" 
+      button#refresh.btn.btn-info.btn-sm type="submit"
+        i.fa.fa-refresh                         
+      button#trash.btn.btn-danger.btn-sm type="submit"
+        i.fa.fa-trash-o
