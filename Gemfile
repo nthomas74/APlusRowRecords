@@ -11,6 +11,7 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
 # stuff for active admin
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'jbuilder', '~> 2.5'
