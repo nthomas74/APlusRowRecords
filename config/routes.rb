@@ -2,11 +2,15 @@ Rails.application.routes.draw do
 
 
 
+  get 'carts/index'
+
   get 'pages/about'
 
   get 'pages/contact'
 
   post '/products', to: 'products#filter_data'
+
+  post '/carts/index', to: 'carts#refresh_cart'
 
   post '/products/:id', to: 'products#add_to_cart'
   devise_for :admin_users, ActiveAdmin::Devise.config
