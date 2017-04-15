@@ -1,0 +1,55 @@
+#page-content-wrapper
+  button.hamburger.is-closed data-toggle="offcanvas" type="button" 
+    span.hamb-top
+    span.hamb-middle
+    span.hamb-bottom
+  .container
+    .row
+      .col-lg-8.col-lg-offset-2
+        .page-header
+          h1
+            | Shipping Details
+          =form_tag orders_user_path do |f|
+            form.form-horizontal              
+                /! Form Name
+                legend CUSTOMER
+                /! Text input
+                .form-group
+                  label.col-md-4.control-label for="customer_name"  CUSTOMER NAME
+                  .col-md-4
+                    input#customer_name.form-control.input-md name="customer_name" placeholder=("CUSTOMER NAME") required="" type="text" /
+                /! Text input
+                .form-group
+                  label.col-md-4.control-label for="customer_email"  CUSTOMER EMAIL
+                  .col-md-4
+                    input#customer_email.form-control.input-md name="customer_email" placeholder=("CUSTOMER EMAIL") required="" type="text" /
+                /! Text input
+                .form-group
+                  label.col-md-4.control-label for="customer_address"  ADDRESS
+                  .col-md-4
+                    input#customer_address.form-control.input-md name="customer_address" placeholder=("ADDRESS") type="text" /
+                /! Text input
+                .form-group
+                  label.col-md-4.control-label for="city"  CITY
+                  .col-md-4
+                    input#city.form-control.input-md name="city" placeholder="CITY" required="" type="text" /
+                .form-group  
+                  label.col-md-4.control-label for="province"  PROVINCE
+                  .col-md-4  
+                    =collection_select(nil, :province_id, @provinces, :id, :name, {selected: @province, prompt: "PROVINCE"}, {class: 'form-control input-md', name: 'province' })   
+                /! Text input
+                .form-group
+                  label.col-md-4.control-label for="postal_code"  POSTAL CODE
+                  .col-md-4
+                    input#postal_code.form-control.input-md name="postal_code" placeholder="POSTAL CODE" required="" type="text" /
+                /! Text input
+                .form-group
+                  label.col-md-4.control-label for="phone1"  PHONE NUMBER
+                  .col-md-4
+                    input#phone1.form-control.input-md name="phone1" placeholder="PHONE1" required="" type="text" /
+                /! Button
+                .form-group
+                  label.col-md-4.control-label for="submit" 
+                  .col-md-4
+                    button.btn.btn-primary id="submit" name="submit" type="submit"  Submit
+=debug params

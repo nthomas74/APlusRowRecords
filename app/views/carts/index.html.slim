@@ -33,10 +33,11 @@ link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css
                     strong 
                       | Total 
                       = number_to_currency(@total)
-                  td
-                    a.btn.btn-success.btn-block href="#"  type="submit"
-                      | Checkout
-                      i.fa.fa-angle-right
+                  - if @total > 0
+                    td
+                      a.btn.btn-success.btn-block href="/orders/user"  type="submit"
+                        | Checkout
+                        i.fa.fa-angle-right
 
 =debug params
 =debug session[:cart]

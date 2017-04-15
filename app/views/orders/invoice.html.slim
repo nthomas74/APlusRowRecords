@@ -1,0 +1,95 @@
+#page-content-wrapper
+  button.hamburger.is-closed data-toggle="offcanvas" type="button" 
+    span.hamb-top
+    span.hamb-middle
+    span.hamb-bottom
+  .container
+    .row
+      .col-lg-8.col-lg-offset-2
+        .container
+        = form_tag orders_done_path do |f|
+          .row
+            .col-md-12
+              .invoice-title
+                h2 Please confirm your order
+                hr/
+              .row
+                .col-xs-6
+                  address
+                    strong Customer Address:
+                    br/
+                    = @user.name
+                    br/
+                    = @user.address
+                    br/
+                    = @user.city
+                    | , 
+                    = @user.province.name
+                    |  
+                    =@user.postal_code
+          .row
+            .col-md-12
+              .panel.panel-default
+                .panel-heading
+                  h3.panel-title
+                    strong Item Summary
+                .panel-body
+                  .table-responsive
+                    table.table.table-condensed
+                      thead
+                        tr
+                          td
+                            strong Product
+                          td.text-center
+                            strong Price
+                          td.text-center
+                            strong Quantity
+                      tbody
+                        /! foreach ($order->lineItems as $line) or some such thing here
+                        =render partial: 'item', collection: @products
+          .row
+            .col-md-12
+              .col-md-4
+                h3.text-center Order Summary
+                hr/
+                .pull-left
+                  h4 Subtotal
+                .pull-right
+                  h4.text-right = number_to_currency(@total)
+                - if @user.province.gst
+                  .clearfix
+                  .pull-left
+                    h4 GST: 
+                  .pull-right
+                    h4.text-right = number_to_currency((@user.province.gst/100)*@total)
+                    - @total += (@user.province.gst/100)*@total
+                - if @user.province.pst
+                  .clearfix
+                  .pull-left
+                    h4 PST: 
+                  .pull-right
+                    h4.text-right = number_to_currency((@user.province.pst/100)*@total)
+                    - @total += (@user.province.pst/100)*@total
+                - if @user.province.hst
+                  .clearfix
+                  .pull-left
+                    h4 HST: 
+                  .pull-right
+                    h4.text-right = number_to_currency((@user.province.hst/100)*@total)  
+                    - @total += (@user.province.hst/100)*@total  
+                .clearfix
+                .pull-left
+                  h4 Order Total
+                .pull-right
+                  h4.text-right = number_to_currency(@total)
+                .clearfix
+                .form-group
+                  .col-md-4
+                    button.btn.btn-primary id="submit" name="submit" type="submit"  Confirm Your Order
+          
+=debug params
+=debug session[:cart]
+
+
+  
+  

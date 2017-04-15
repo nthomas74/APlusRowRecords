@@ -1,0 +1,14 @@
+- quantity = 0 
+- @cart_items.find do |l| 
+    - if l[0] == item.id 
+      - quantity = l[1]
+tr
+  td.col-md-3
+    .media
+      a.thumbnail.pull-left href="#" 
+        = image_tag item.image.url(:small)
+      .media-body
+        h4.media-heading = item.name
+        h5.media-heading = item.description
+  td.text-center = number_to_currency(item.price)
+  td.text-center = quantity

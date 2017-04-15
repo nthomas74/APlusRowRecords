@@ -28,9 +28,11 @@ class CartsController < ApplicationController
     @cart_items = session[:cart]
     array_of_ids = []
     @total = 0
-    @cart_items.each do |item|
-      array_of_ids << item[0]
-      @total += (Product.find(item[0]).price * item[1])
+    if @cart_items
+      @cart_items.each do |item|
+        array_of_ids << item[0]
+        @total += (Product.find(item[0]).price * item[1])
+      end
     end
     @products = Product.where(id: array_of_ids)
     render :index
